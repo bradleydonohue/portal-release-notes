@@ -547,8 +547,11 @@
 </footer>
 
 <script>
-  var reactions = {};
-  var comments  = {};
+  var reactions = JSON.parse(localStorage.getItem('mt_reactions') || '{}');
+  var comments  = JSON.parse(localStorage.getItem('mt_comments')  || '{}');
+
+  function saveReactions() { localStorage.setItem('mt_reactions', JSON.stringify(reactions)); }
+  function saveComments()  { localStorage.setItem('mt_comments',  JSON.stringify(comments));  }
 
   function toggleReact(btn, key) {
     if (!reactions[key]) reactions[key] = { n: 0, on: false };
@@ -557,6 +560,7 @@
     r.n  = r.on ? r.n + 1 : Math.max(0, r.n - 1);
     btn.classList.toggle('active', r.on);
     btn.querySelector('.cnt').textContent = r.n || '';
+    saveReactions();
   }
 
   function toggleComments(id, btn) {
@@ -573,7 +577,7 @@
     var tx = document.getElementById('tx' + uid).value.trim();
     if (!nm || !tx) { alert('Please enter your name and a comment.'); return; }
     if (!comments[uid]) comments[uid] = [];
-    var c = { nm: nm, tx: tx, d: new Date() };
+    var c = { nm: nm, tx: tx, d: new Date().toISOString() };
     comments[uid].push(c);
     renderComment(uid, c);
     document.getElementById('nm' + uid).value = '';
@@ -581,11 +585,12 @@
     var n = comments[uid].length;
     var lbl = document.querySelector('#update-' + uid + ' .clabel');
     if (lbl) lbl.textContent = n + ' comment' + (n !== 1 ? 's' : '');
+    saveComments();
   }
 
   function renderComment(uid, c) {
     var ex = document.getElementById('ex' + uid);
-    var d  = c.d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    var d  = new Date(c.d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     var div = document.createElement('div');
     div.className = 'comment-item';
     div.innerHTML =
@@ -600,6 +605,33 @@
   function esc(s) {
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
+
+  // Restore saved state on load
+  (function init() {
+    // Reactions
+    Object.keys(reactions).forEach(function(key) {
+      var r = reactions[key];
+      if (!r.on && !r.n) return;
+      // key format: r{uid}{a/b/c} — find the button by iterating react buttons
+      document.querySelectorAll('.react-btn').forEach(function(btn) {
+        var attr = btn.getAttribute('onclick') || '';
+        if (attr.indexOf("'" + key + "'") !== -1) {
+          btn.classList.toggle('active', r.on);
+          btn.querySelector('.cnt').textContent = r.n || '';
+        }
+      });
+    });
+
+    // Comments
+    Object.keys(comments).forEach(function(uid) {
+      (comments[uid] || []).forEach(function(c) { renderComment(uid, c); });
+      var n = comments[uid].length;
+      if (n) {
+        var lbl = document.querySelector('#update-' + uid + ' .clabel');
+        if (lbl) lbl.textContent = n + ' comment' + (n !== 1 ? 's' : '');
+      }
+    });
+  })();
 </script>
 </body>
 </html>
