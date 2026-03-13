@@ -1,0 +1,34 @@
+name: Sync from Angela's fork
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # every hour
+  workflow_dispatch:       # manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add Angela's remote
+        run: git remote add angela https://github.com/angelaweir1/portal-release-notes.git
+
+      - name: Fetch Angela's latest
+        run: git fetch angela main
+
+      - name: Check for new commits
+        id: check
+        run: |
+          COUNT=$(git rev-list --count HEAD..angela/main)
+          echo "new_commits=$COUNT" >> "$GITHUB_OUTPUT"
+
+      - name: Merge and push
+        if: steps.check.outputs.new_commits != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git merge angela/main --no-edit
+          git push origin main
