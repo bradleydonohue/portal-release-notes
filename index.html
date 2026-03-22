@@ -341,10 +341,121 @@
     gap: 8px;
   }
 
+  /* ── NEW CARD FORMAT (multi-section) ── */
+  .update-header {
+    padding: 24px 24px 16px;
+  }
+
+  .version-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .update-card h2.update-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+    letter-spacing: -0.25px;
+    margin: 0;
+  }
+
+  .update-section {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .update-section .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .update-section .section-label::after { display: none; }
+
+  .update-section .section-label.shipped  { color: var(--green); }
+  .update-section .section-label.in-progress { color: var(--accent); }
+
+  .rollout-section {
+    background: var(--accent-dim);
+    border-top-color: var(--accent-border);
+  }
+
+  .rollout-section .section-label { color: var(--accent); }
+
+  .in-progress-section {
+    background: var(--yellow-bg);
+    border-top-color: var(--yellow-border);
+  }
+
+  .in-progress-section .section-label { color: var(--yellow); }
+
+  .update-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .update-item {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .update-item strong {
+    color: var(--text);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .update-item p { margin: 0; }
+
+  .sub-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 8px;
+    padding-left: 2px;
+  }
+
+  .sub-list li {
+    font-size: 13px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tag.new {
+    background: var(--green-bg);
+    color: var(--green);
+    border: 1px solid var(--green-border);
+  }
+
+  .tag.updated {
+    background: var(--yellow-bg);
+    color: var(--yellow);
+    border: 1px solid var(--yellow-border);
+  }
+
   @media (max-width: 580px) {
     header, main { padding-left: 18px; padding-right: 18px; }
     .update-inner { padding: 20px 16px; }
-    .reactions-bar, .comments-wrap { padding-left: 16px; padding-right: 16px; }
+    .update-header, .update-section { padding-left: 16px; padding-right: 16px; }
   }
 </style>
 </head>
@@ -365,7 +476,86 @@
 
   <p class="updates-note">Everything on this list is now live in Production and ready for you to review with any advisors who may have run into issues. If you continue to see problems, please reach out or add a comment below!</p>
 
-  <!-- NEW CARD: Week of March 13 -->
+  <!-- VERSION CARD: March 21, 2025 -->
+  <div class="update-card" id="update-3">
+    <div class="update-header">
+      <div class="update-meta">
+        <span class="version-badge">March 21, 2025</span>
+      </div>
+      <h2 class="update-title">Dashboard Scrub, New Sources, Admin Settings &amp; More</h2>
+    </div>
+
+    <div class="update-section">
+      <h3 class="section-label shipped">✦ Shipped</h3>
+      <ul class="update-list">
+
+        <li class="update-item">
+          <strong>Dashboard Scrub</strong>
+          <p>Completed a full review of the Dashboard. Removed any metrics that weren't calculating correctly — we'll revisit those once we have the ability to set a Source on a Sale, which will resolve the underlying logic issues. Tooltips have been added anywhere that was unclear or potentially confusing.</p>
+        </li>
+
+        <li class="update-item">
+          <strong>New Sources &amp; LOB</strong>
+          <p>Added new Sources and a new Line of Business to support the data migration:</p>
+          <ul class="sub-list">
+            <li><span class="tag new">New</span> Organic</li>
+            <li><span class="tag new">New</span> Networking</li>
+            <li><span class="tag new">New</span> Acquired Book of Business</li>
+            <li><span class="tag new">New</span> Referral – Next Gen Assets</li>
+            <li><span class="tag new">New</span> Annual Review</li>
+            <li><span class="tag updated">Updated</span> Partnership → renamed to <strong>Strategic Alliance</strong></li>
+            <li><span class="tag new">New LOB</span> Estate/Trust</li>
+          </ul>
+        </li>
+
+        <li class="update-item">
+          <strong>Admin Settings (Beta)</strong>
+          <p>Built an initial Beta version of the Settings Page. From here you can configure LOB Revenue Calc percentages, and create or edit Group Members. You can also create a new group — Liz can walk through those steps. <em>Note: Currently only visible to internal ARC users via impersonation. Not visible to Advisors.</em></p>
+        </li>
+
+        <li class="update-item">
+          <strong>Advisor Selector</strong>
+          <p>Added an Advisor Selector to both the Opportunity Create modal and the New Event modal. This allows the logged-in user to select a different Advisor inline if needed, rather than relying solely on the preset.</p>
+        </li>
+
+        <li class="update-item">
+          <strong>Estimated Cost on New Event Modal</strong>
+          <p>Estimated Cost field has been added directly to the New Event modal.</p>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="update-section rollout-section">
+      <h3 class="section-label">🚀 Roll Out Update</h3>
+      <ul class="update-list">
+        <li class="update-item">
+          <strong>Full Access Starting Monday</strong>
+          <p>Starting Monday, everyone who had access to Old Tracker will have access to New Tracker. If you notice any issues, please let us know right away.</p>
+        </li>
+        <li class="update-item">
+          <strong>Bugs vs. Feedback</strong>
+          <p>As Advisors start getting in and training begins — please continue to flag any TRUE bugs immediately. For general feedback, we'll keep that to email going forward. We'll continue prioritizing the build out and making ongoing improvements to Tracker!</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="update-section in-progress-section">
+      <h3 class="section-label in-progress">⟳ In Progress</h3>
+      <ul class="update-list">
+        <li class="update-item">
+          <strong>Duplicate Contact Detection &amp; Merge</strong>
+          <p>Working on a button that will identify potential duplicate contacts and allow you to merge them. This will be especially useful post-migration for cleaning up any dupes. Targeting release early next week.</p>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  <!-- END VERSION CARD -->
+
+  <!-- PRIOR UPDATES -->
+  <div class="section-label">Prior Updates</div>
+
   <div class="update-card" id="update-2">
     <div class="update-inner">
       <div class="update-meta">
@@ -376,56 +566,16 @@
       <div class="update-title">Dashboard Overhaul, New Event Tile &amp; Opportunities Improvements</div>
       <p class="update-desc">A big week &mdash; lots of highly-requested updates across the Dashboard and Opportunities screen, plus a brand-new Event tile:</p>
       <ul class="change-list">
-        <li><strong>New Event Tile on the Dashboard</strong> &mdash; A highly requested addition! All Events and their key data points are now laid out in one comparison table, complete with individual figures and totals. Big win based on your feedback. <em>Note: still in testing &mdash; will be fully pushed out by Monday.</em></li>
+        <li><strong>New Event Tile on the Dashboard</strong> &mdash; A highly requested addition! All Events and their key data points are now laid out in one comparison table, complete with individual figures and totals. Big win based on your feedback.</li>
         <li><strong>Sort by Advisor on Opportunities Screen</strong> &mdash; You can now sort the Opportunities list by Advisor directly from the screen.</li>
         <li><strong>Edit Source on Tracked Events</strong> &mdash; Previously locked down, you can now edit an opportunity source even when that source is a tracked Event.</li>
         <li><strong>Additional Dashboard Tool Tips</strong> &mdash; Added more tooltips in areas where we've received clarifying questions, to reduce ambiguity right in the product.</li>
         <li><strong>Prior Year Date Filters on Dashboard</strong> &mdash; The Dashboard date filter now includes prior years (2023, 2022, etc.) when data exists for those periods.</li>
         <li><strong>Opportunities Date Filter Redesign</strong> &mdash; The date filter on the Opportunities screen is now a dropdown that matches the Dashboard's date filter, keeping the experience consistent and simpler.</li>
-        <li><strong>Costs &amp; ROI Added to Dashboard Export</strong> &mdash; Cost breakdown data is now included in the Dashboard Export for an initial view of ROI. <em>Note: still in testing &mdash; will be fully pushed out by Monday.</em></li>
+        <li><strong>Costs &amp; ROI Added to Dashboard Export</strong> &mdash; Cost breakdown data is now included in the Dashboard Export for an initial view of ROI.</li>
       </ul>
     </div>
   </div>
-
-  <!-- ROLL OUT UPDATE -->
-  <div class="section-label">Roll Out Update</div>
-  <div class="notice-card rollout">
-    <div class="notice-title">&#128640; Data Migration &amp; Roll Out Status</div>
-    <ul class="notice-list">
-      <li><strong>Data Migration in Progress</strong> &mdash; Focused on limiting duplicates in Tracker and combining all data points (Opportunities, Sales, Contacts, Registrants) into one unified record per contact.</li>
-      <li><strong>Phased Roll Out Plan</strong> &mdash; We'll do the full data migration with one advisor group first, then refine how the rules pull in and how data is updated before rolling out to all groups.</li>
-      <li><strong>Group Configuration</strong> &mdash; Liz is working on getting the groups configured. Hoping to have the Settings page out by Monday so strategists can create groups in Tracker and set LOB percentages directly &mdash; should streamline this significantly.</li>
-      <li><strong>Bug &amp; Data Fixes First</strong> &mdash; Continuing to prioritize any actual bugs or incorrect data this week and next before moving forward.</li>
-    </ul>
-  </div>
-
-  <!-- WHAT'S NEXT -->
-  <div class="section-label">What's Next</div>
-  <div class="notice-card next">
-    <div class="notice-title">&#128301; Upcoming Enhancements</div>
-    <p class="notice-note">We have many more lined up and are continuing to work through feedback &mdash; but these are our next hit list priorities:</p>
-    <ul class="notice-list">
-      <li><strong>Data Migration</strong> &mdash; Plan is in place and we've started pulling data to aggregate contacts and identify duplicates. Data mapping rules are already built. Feeling good about progress! <span class="in-progress-badge">In Progress</span></li>
-      <li><strong>Create New Sources &amp; LOBs for Data Migration</strong> &mdash; Setting up the sources and lines of business needed ahead of migration</li>
-      <li><strong>Dashboard Data Testing Extravaganza</strong> &mdash; With more live data in the system, we'll be running through all calculations tile by tile to make sure everything matches and is consistent</li>
-      <li><strong>Additional Tool Tips</strong> &mdash; Continuing to add tooltips to clarify calculations and remove any remaining ambiguity</li>
-      <li><strong>Settings Page</strong> &mdash; Will be visible to ARC Users only to start; goal is to simplify adding groups and setting LOB percentages</li>
-      <li><strong>Event Create Enhancements</strong> &mdash; Add estimated costs and the ability to assign an Advisor when creating an Event</li>
-    </ul>
-  </div>
-
-  <!-- KNOWN ISSUES -->
-  <div class="section-label">Known Issues</div>
-  <div class="notice-card issues">
-    <div class="notice-title">&#9888;&#65039; In Progress</div>
-    <ul class="notice-list">
-      <li><strong>Redtail Integration (Justin Dean's Office)</strong> &mdash; The broader Redtail connection issues have been resolved, but Justin Dean's office is still experiencing a problem. Looking into it.</li>
-      <li><strong>Advisor Reassignment on Export</strong> &mdash; Advisors who have been reassigned are not yet reflecting correctly on the Export (shows the initial advisor). This is teed up to be fixed.</li>
-    </ul>
-  </div>
-
-  <!-- PRIOR UPDATES -->
-  <div class="section-label">Prior Updates</div>
 
   <div class="update-card" id="update-1">
     <div class="update-inner">
@@ -450,7 +600,7 @@
 </main>
 
 <footer>
-  <span>Last updated March 13, 2025</span>
+  <span>Last updated March 21, 2025</span>
   <span>Marketing Tracker Internal Updates</span>
 </footer>
 
