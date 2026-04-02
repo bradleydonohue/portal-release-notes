@@ -277,6 +277,43 @@
 
   .notice-card.next .notice-title     { color: var(--yellow); }
   .notice-card.rollout .notice-title  { color: var(--accent); }
+
+  .notice-sublist {
+    list-style: none;
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-left: 12px;
+    border-left: 2px solid var(--accent-border);
+  }
+
+  .notice-sublist li {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    padding-left: 10px;
+    line-height: 1.5;
+  }
+
+  .notice-sublist li::before { content: none; }
+
+  .troubleshoot-box {
+    margin-top: 6px;
+    background: var(--accent-dim);
+    border: 1px solid var(--accent-border);
+    border-radius: 6px;
+    padding: 10px 14px;
+  }
+
+  .troubleshoot-box p {
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 0;
+  }
+
+  .troubleshoot-box .notice-sublist {
+    margin-top: 8px;
+  }
   .notice-card.issues .notice-title   { color: var(--red); }
 
   .notice-note {
@@ -414,11 +451,17 @@
     line-height: 1.6;
   }
 
-  .update-item strong {
+  .update-item > strong,
+  .update-item > p ~ strong {
     color: var(--text);
     font-weight: 600;
     display: block;
     margin-bottom: 2px;
+  }
+
+  .update-item .notice-sublist strong {
+    display: inline;
+    margin-bottom: 0;
   }
 
   .update-item p { margin: 0; }
@@ -475,6 +518,86 @@
   <div class="section-label">Recent Updates</div>
 
   <p class="updates-note">Everything on this list is now live in Production and ready for you to review with any advisors who may have run into issues. If you continue to see problems, please reach out or add a comment below!</p>
+
+  <!-- VERSION CARD: April 2, 2026 -->
+  <div class="update-card">
+    <div class="update-header">
+      <div class="update-meta">
+        <span class="version-badge">April 2, 2026</span>
+      </div>
+      <h2 class="update-title">Merge Contacts, Bulk Edit Opportunities, Sales Source &amp; More</h2>
+    </div>
+
+    <div class="update-section">
+      <h3 class="section-label shipped">✦ Shipped</h3>
+      <ul class="update-list">
+
+        <li class="update-item">
+          <strong>Merge Contacts</strong>
+          <p>You can now merge duplicate contacts directly in Tracker. A duplicate finder on the Opportunities page will identify potential duplicates and allow you to merge them into a single unified record. This has been a long time coming — big win for data quality!</p>
+        </li>
+
+        <li class="update-item">
+          <strong>Assign a Source to a Sale</strong>
+          <p>You can now assign a Source directly to an individual sale. The default will always be the Opportunity Source, but it can be updated on a per-sale basis. This gives you much more accurate attribution at the sale level.</p>
+        </li>
+
+        <li class="update-item">
+          <strong>Sales Source Throughout the Dashboard</strong>
+          <p>To correspond with the new Sale-level Source, dashboard stats now reflect Sales Source across the board. Labels and tooltips have been updated accordingly.</p>
+        </li>
+
+        <li class="update-item">
+          <strong>Bulk Edit Opportunities</strong>
+          <p>You can now select and edit multiple Opportunities at a time. Use this to change status, reassign an Advisor, or delete records in bulk — a big time saver.</p>
+        </li>
+
+        <li class="update-item">
+          <strong>Topic Filter on Tracker Dashboard</strong>
+          <p>Added a Topic filter to the Tracker dashboard for more granular filtering.</p>
+        </li>
+
+        <li class="update-item">
+          <strong>Digital Campaign Reminders</strong>
+          <p>Reminders for activities where the vendor is White Glove or Eight Digit Media now reflect that it is a digital campaign.</p>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="update-section rollout-section">
+      <h3 class="section-label">&#127881; Roll Out Update</h3>
+      <ul class="update-list">
+        <li class="update-item">
+          <strong>Data Migration Complete</strong>
+          <p>Migration is complete for all groups including all pilot groups. As of today, data should be looking solid!</p>
+        </li>
+        <li class="update-item">
+          <strong>Roll Out is Complete</strong>
+          <p>Everyone who had access to Old Tracker now has access to New Tracker. If you notice any issues, please reach out right away.</p>
+        </li>
+        <li class="update-item">
+          <strong>Tracker Access Troubleshooting</strong>
+          <div class="troubleshoot-box">
+            <p>All Elevate users should have access to Tracker. If an advisor can see the Marketing Tab but cannot see Tracker, check whether they appear in a group via Settings (impersonate them to verify). Use the scenarios below to resolve:</p>
+            <ul class="notice-sublist">
+              <li>If <strong>no group exists</strong> for them &mdash; stay on their portal and create the group in Settings. This will grant Tracker access. You can add other advisors to the same group from there using their portal email address.</li>
+              <li>If <strong>a group exists but they're not in it</strong> &mdash; impersonate an advisor who IS in that group, then add the new advisor to it. Do not create a new group, as this will create a duplicate.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="update-item">
+          <strong>Bugs First</strong>
+          <p>Continuing to prioritize any true bugs or data accuracy issues. Flag anything you spot right away.</p>
+        </li>
+        <li class="update-item">
+          <strong>Feedback</strong>
+          <p>For general feedback, keep it to email. We'll continue improving Tracker and prioritizing build-outs!</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- END VERSION CARD -->
 
   <!-- VERSION CARD: March 21, 2025 -->
   <div class="update-card" id="update-3">
